@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_learning/bloc/signup/signup_event.dart';
 import 'package:e_learning/bloc/signup/signup_state.dart';
-import 'package:e_learning/repository/signup_repository.dart';
+import 'package:e_learning/repository/Auth/Auth_repository.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupStates> {
-  SignupRepository signupRepository = SignupRepository();
+  AuthRepository signupRepository = AuthRepository();
 
   SignupBloc(this.signupRepository) : super(const SignupStates()) {
     on<SignUpButtonPressed>(signup);

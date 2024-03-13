@@ -45,7 +45,7 @@ class SignUpScreen extends StatelessWidget {
                       listener: (context, state) {
                         print(state.signupStatus);
                         if (state.signupStatus == SignupStatus.success) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const SignInScreen()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInScreen()));
                         } else if (state.signupStatus == SignupStatus.failure) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
@@ -71,7 +71,11 @@ class SignUpScreen extends StatelessWidget {
                         );
                       },
                     ),
-                    _alreadyHaveAnAccount()
+                    _alreadyHaveAnAccount(
+                      onPressed: (){
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInScreen()));
+                      }
+                    )
                   ],
                 ),
                 _lowerSection()
@@ -93,7 +97,7 @@ class SignUpScreen extends StatelessWidget {
 Widget _upperSection(){
   return const Column(
     children: [
-      const Row(
+      Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
@@ -112,7 +116,7 @@ Widget _upperSection(){
       SizedBox(
         height: 20,
       ),
-      const Text(
+      Text(
         'Create an account so you can explore all the existing jobs',
         textAlign: TextAlign.center,
         style: TextStyle(
@@ -180,7 +184,7 @@ Widget _alreadyHaveAnAccount({VoidCallback? onPressed}){
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
