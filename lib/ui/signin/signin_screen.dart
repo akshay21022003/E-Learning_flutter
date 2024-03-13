@@ -1,7 +1,8 @@
+import 'package:e_learning/utils/button.dart';
 import 'package:flutter/material.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -121,46 +122,9 @@ class SignIn extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                  width: 357,
-                  height: 60,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  decoration: ShapeDecoration(
-                    color: Color(0xFF1F41BB),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    shadows: [
-                      BoxShadow(
-                        color: Color(0xFFCAD6FF),
-                        blurRadius: 20,
-                        offset: Offset(0, 10),
-                        spreadRadius: 0,
-                      )
-                    ],
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Sign in',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w600,
-                          height: 0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
+                customButton(
+                  name: 'Sign in',
+                  onPressed: (){}
                 ),
                 Container(
                   width: 357,
