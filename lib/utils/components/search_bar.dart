@@ -15,8 +15,8 @@ class _MySearchBarState extends State<MySearchBar> {
       decoration: BoxDecoration(
         border: Border.all(color:Theme.of(context).colorScheme.secondary)
         ),
-      padding: const EdgeInsets.all(25),
-      margin: EdgeInsets.only(left: 25,right: 25,bottom: 25,top: 25),
+      padding: const EdgeInsets.all(12),
+      margin: EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.secondary,

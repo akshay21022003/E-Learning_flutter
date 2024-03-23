@@ -1,3 +1,4 @@
+import 'package:e_learning/model/course_model.dart';
 import 'package:flutter/material.dart';
 
 class MyTabBar extends StatelessWidget {
@@ -5,6 +6,13 @@ class MyTabBar extends StatelessWidget {
 
   const MyTabBar({Key? key, required this.tabController}) : super(key: key);
 
+  List<Tab> _buildCategoryTabs(){
+    return CourseCategory.values.map((category){
+      return Tab(
+        text: category.toString().split(".").last,
+      );
+    }).toList();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,26 +29,7 @@ class MyTabBar extends StatelessWidget {
           indicatorColor: Theme.of(context).colorScheme.inversePrimary,
           isScrollable: true,
           physics: BouncingScrollPhysics(),
-          tabs: [
-            Tab(
-                text: 'all'
-            ),
-            Tab(
-              text: 'software'
-            ),
-            Tab(
-              text: 'design'
-            ),
-            Tab(
-              text: 'business',
-            ),
-            Tab(
-              text: 'marketing',
-            ),
-            Tab(
-              text: 'photography',
-            ),
-          ],
+          tabs: _buildCategoryTabs()
         ),
       ),
     );

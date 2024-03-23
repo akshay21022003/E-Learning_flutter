@@ -1,6 +1,8 @@
+import 'package:e_learning/bloc/course/course_bloc.dart';
 import 'package:e_learning/bloc/signin/signin_bloc.dart';
 import 'package:e_learning/bloc/signup/signup_bloc.dart';
 import 'package:e_learning/repository/Auth/Auth_repository.dart';
+import 'package:e_learning/repository/course/course_repository.dart';
 import 'package:e_learning/ui/homepage/home_screen.dart';
 import 'package:e_learning/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(create: (_)=> SignupBloc(AuthRepository())),
-          BlocProvider(create: (_)=> SigninBloc(AuthRepository()))
+          BlocProvider(create: (_)=> SigninBloc(AuthRepository())),
+          BlocProvider(create: (_)=>CourseBloc(CourseRepository()))
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
