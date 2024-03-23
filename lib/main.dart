@@ -1,7 +1,8 @@
 import 'package:e_learning/bloc/signin/signin_bloc.dart';
 import 'package:e_learning/bloc/signup/signup_bloc.dart';
 import 'package:e_learning/repository/Auth/Auth_repository.dart';
-import 'package:e_learning/ui/signup/signup_screen.dart';
+import 'package:e_learning/ui/homepage/home_screen.dart';
+import 'package:e_learning/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,12 +20,10 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (_)=> SigninBloc(AuthRepository()))
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
-            themeMode: ThemeMode.dark,
-            theme: ThemeData(
-              useMaterial3: true,
-            ),
-            home: SignUpScreen()
+            theme: darkTheme,
+            home: const HomeScreen()
         )
     );
   }

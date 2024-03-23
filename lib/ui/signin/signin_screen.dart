@@ -3,8 +3,8 @@ import 'package:e_learning/bloc/signin/signin_event.dart';
 import 'package:e_learning/bloc/signin/signin_state.dart';
 import 'package:e_learning/ui/homepage/home_screen.dart';
 import 'package:e_learning/ui/signup/signup_screen.dart';
-import 'package:e_learning/utils/button.dart';
-import 'package:e_learning/utils/textbox.dart';
+import 'package:e_learning/utils/components/button.dart';
+import 'package:e_learning/utils/components/textbox.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
