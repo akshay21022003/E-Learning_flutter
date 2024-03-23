@@ -130,6 +130,38 @@ class CourseRepository {
             ),
           ],
         ),
+        SectionModel(
+          id: "65f5b61c241999060694b0bg",
+          title: "Yoga Breathing Techniques",
+          videos: [
+            VideoModel(
+              id: "65f5b61c241999060694b0bh",
+              title: "Pranayama",
+              url: "www.pranayamavideo.com",
+            ),
+            VideoModel(
+              id: "65f5b61c241999060694b0bi",
+              title: "Alternate Nostril Breathing",
+              url: "www.alternatenostrilbreathingvideo.com",
+            ),
+          ],
+        ),
+        SectionModel(
+          id: "65f5b61c241999060694b0bj",
+          title: "Meditation Practices",
+          videos: [
+            VideoModel(
+              id: "65f5b61c241999060694b0bk",
+              title: "Mindfulness Meditation",
+              url: "www.mindfulnessmeditationvideo.com",
+            ),
+            VideoModel(
+              id: "65f5b61c241999060694b0bl",
+              title: "Loving-Kindness Meditation",
+              url: "www.lovingkindnessmeditationvideo.com",
+            ),
+          ],
+        ),
       ],
     ),
     CourseModel(

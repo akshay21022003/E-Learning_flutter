@@ -1,3 +1,4 @@
+import 'package:e_learning/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class MySliverAppBar extends StatelessWidget {
@@ -17,12 +18,17 @@ class MySliverAppBar extends StatelessWidget {
       floating: false,
       pinned: true,
       centerTitle: true,
-      actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.shopping_cart))
-      ],
       backgroundColor: Theme.of(context).colorScheme.background,
       foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-      title:const Text('AkshayAcademy'),
+      title:Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Akshay',style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),),
+          Text('Academy',style: TextStyle(color: primaryColor),),
+          SizedBox(width: 35,)
+        ],
+      ),
+      leading: Icon(Icons.school,color: Theme.of(context).colorScheme.inversePrimary),
       flexibleSpace: FlexibleSpaceBar(
         background: Padding(
           padding: const EdgeInsets.only(bottom: 50),

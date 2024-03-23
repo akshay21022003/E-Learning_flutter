@@ -16,21 +16,12 @@ class MyTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Theme(
-        data: Theme.of(context).copyWith(
-          tabBarTheme: Theme.of(context).tabBarTheme.copyWith(
-            labelColor: Theme.of(context).colorScheme.inversePrimary,
-            unselectedLabelColor: Theme.of(context).colorScheme.primary,
-
-          ),
-        ),
-        child: TabBar(
+      child:  TabBar(
           controller: tabController,
           indicatorColor: Theme.of(context).colorScheme.inversePrimary,
           isScrollable: true,
           physics: BouncingScrollPhysics(),
           tabs: _buildCategoryTabs()
-        ),
       ),
     );
   }
