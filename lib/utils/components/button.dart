@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget customButton({String? name,VoidCallback? onPressed}) {
+Widget customButton({String? name,VoidCallback? onPressed,BuildContext? context}) {
   return Column(
     children: [
       GestureDetector(
@@ -14,14 +14,14 @@ Widget customButton({String? name,VoidCallback? onPressed}) {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
-            shadows: [
-              BoxShadow(
-                color: Color(0xFFCAD6FF),
-                blurRadius: 20,
-                offset: Offset(0, 10),
-                spreadRadius: 0,
-              )
-            ],
+            // shadows: [
+            //   BoxShadow(
+            //     color: Theme.of(context!).colorScheme.primary,
+            //     blurRadius: 10,
+            //     offset: Offset(2, 2),
+            //     spreadRadius: 0,
+            //   )
+            // ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,

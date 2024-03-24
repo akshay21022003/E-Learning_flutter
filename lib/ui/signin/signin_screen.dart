@@ -17,17 +17,17 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
           body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            _upperSection(),
+            _upperSection(context),
             Column(
               children: [
-                customTextBox(name: 'Email', controller: _emailController),
-                customTextBox(
-                    name: 'Password', controller: _passwordController),
+                customTextBox(name: 'Email', controller: _emailController,context: context),
+                customTextBox(name: 'Password', controller: _passwordController,context: context),
                 _forgetPassword(),
                 BlocConsumer<SigninBloc, SigninState>(
                     listener: (context, state) {
@@ -59,12 +59,14 @@ class SignInScreen extends StatelessWidget {
                         context.read<SigninBloc>().add(SignInButtonPressed(
                             email: _emailController.text.trim(),
                             password: _passwordController.text.trim()));
-                      });
+                      },
+                  context: context
+                  );
                 }),
                 _createNewAccount(onPressed: () {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => SignUpScreen()));
-                })
+                },context: context)
               ],
             ),
             _lowerSection()
@@ -75,8 +77,8 @@ class SignInScreen extends StatelessWidget {
   }
 }
 
-Widget _upperSection() {
-  return const Column(
+Widget _upperSection(BuildContext context) {
+  return Column(
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +103,7 @@ Widget _upperSection() {
         'Welcome back you’ve\nbeen missed!',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.black,
+          color:  Theme.of(context).colorScheme.inversePrimary,
           fontSize: 16,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.bold,
@@ -178,7 +180,7 @@ Widget _forgetPassword() {
   );
 }
 
-Widget _createNewAccount({VoidCallback? onPressed}) {
+Widget _createNewAccount({VoidCallback? onPressed,BuildContext? context}) {
   return GestureDetector(
     onTap: onPressed,
     child: Container(
@@ -191,7 +193,7 @@ Widget _createNewAccount({VoidCallback? onPressed}) {
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-      child: const Row(
+      child:  Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -200,7 +202,7 @@ Widget _createNewAccount({VoidCallback? onPressed}) {
             'Create new account',
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Color(0xFF494949),
+              color: Theme.of(context!).colorScheme.background,
               fontSize: 14,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w600,

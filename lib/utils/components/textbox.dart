@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-Widget customTextBox({String? name,TextEditingController? controller}){
+Widget customTextBox({String? name,TextEditingController? controller,BuildContext? context}){
   return Column(
     children: [
       Container(
@@ -7,7 +7,7 @@ Widget customTextBox({String? name,TextEditingController? controller}){
         height: 64,
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         decoration: BoxDecoration(
-          color: Color(0xFFF1F4FF),
+          color: Theme.of(context!).colorScheme.secondary,
           border: Border.all(width: 2, color: Color(0xFF1F41BB)
           ),
           borderRadius: BorderRadius.circular(10),
@@ -19,7 +19,7 @@ Widget customTextBox({String? name,TextEditingController? controller}){
             hintText: name,
             border: InputBorder.none,
             hintStyle: TextStyle(
-              color: Color(0xFF494949),
+              color: Theme.of(context).colorScheme.primary.withOpacity(0.5),
               fontSize: 16,
               fontFamily: 'Poppins',
               fontWeight: FontWeight.w500,

@@ -1,0 +1,235 @@
+import 'package:e_learning/utils/styles.dart';
+import 'package:flutter/material.dart';
+import '../../model/course_model.dart';
+
+class DetailsScreen extends StatelessWidget {
+  final CourseModel courseModel;
+
+  const DetailsScreen({Key? key, required this.courseModel}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+      ),
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+      body: CustomScrollView(
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(20),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12, bottom: 12),
+                        child: Container(
+                          height: 200,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(courseModel.thumbnail),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        courseModel.title,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontSize: 19,
+                        ),
+                      ),
+                      verticalSpaceSmall,
+                      Text(
+                        'Build fullstack React.js applications with Node.js, Express.js & MongoDB (MERN) with this project-focused course.',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary,
+                          fontSize: 13,
+                        ),
+                      ),
+                      verticalSpaceMedium,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            '₹${courseModel.price}',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                            ),
+                          ),
+                          const Row(
+                            children: [
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star,
+                                color: Colors.yellow,
+                              ),
+                              Icon(
+                                Icons.star_border_rounded,
+                                color: Colors.yellow,
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      verticalSpaceMedium,
+                      Container(
+                        height: 50,
+                        color: primaryColor,
+                        child: Center(
+                          child: Text(
+                            'Buy now',
+                            style: TextStyle(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              fontSize: 19,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      verticalSpaceMedium,
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Add To Cart',
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          horizontalSpaceSmall,
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 50,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Add To Wishlist',
+                                  style: TextStyle(
+                                    color: Theme.of(context).colorScheme.primary,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      verticalSpaceMedium,
+                      Text(
+                        'Curriculum ',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      verticalSpaceSmall,
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: courseModel.sections.length,
+                itemBuilder: (context, index) {
+                  var courseSection = courseModel.sections[index];
+                  return ExpansionTile(
+                    leading: Container(
+                      width: 30,
+                      height: 30,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${index + 1}',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: Text(
+                      courseSection.title,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.inversePrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    trailing: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: courseSection.videos.length,
+                        itemBuilder: (context, videoIndex) {
+                          var video = courseSection.videos[videoIndex];
+                          return ListTile(
+                            title: Text(
+                              video.title,
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.inversePrimary,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            onTap: () {
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

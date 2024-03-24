@@ -1,5 +1,10 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:e_learning/bloc/course/course_bloc.dart';
+import 'package:e_learning/bloc/course/course_event.dart';
+import 'package:e_learning/bloc/course/course_state.dart';
 import 'package:e_learning/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/course_model.dart';
 
@@ -88,32 +93,110 @@ class DetailsScreen extends StatelessWidget {
                   ),
                 ),
                 verticalSpaceMedium,
+                BlocListener<CourseBloc,CourseState>(
+                  listener:(context,state){
+                    if(state.courseStatus == CourseStatus.success){
+                      final snackBar = SnackBar(
+                        elevation: 0,
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        content: AwesomeSnackbarContent(
+                          title: 'Cart',
+                          message: state.message,
+                          contentType: ContentType.success,
+                        ),
+                      );
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    }
+                    if(state.courseStatus == CourseStatus.failure){
+                      final snackBar = SnackBar(
+                        elevation: 0,
+                        behavior: SnackBarBehavior.floating,
+                        backgroundColor: Colors.transparent,
+                        content: AwesomeSnackbarContent(
+                          title: 'Cart',
+                          message: state.message,
+                          contentType: ContentType.failure,
+                        ),
+                      );
+
+                      ScaffoldMessenger.of(context)
+                        ..hideCurrentSnackBar()
+                        ..showSnackBar(snackBar);
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: (){
+                            context.read<CourseBloc>().add(AddedToCart(userId: "65edfb88ed5c75b45e38408c", courseId: courseModel.id.toString()));
+                          },
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(width: 1,color: Theme.of(context).colorScheme.primary)
+                            ),
+                            child: Center(
+                              child: Text('Add To Cart',style: TextStyle(color:Theme.of(context).colorScheme.primary ),),
+                            ),
+                          ),
+                        ),
+                      ),
+                      horizontalSpaceSmall,
+                      Expanded(
+                        flex: 1,
+                        child: GestureDetector(
+                          onTap: (){
+                            context.read<CourseBloc>().add(AddedToWishlist(userId: "65edfb88ed5c75b45e38408c", courseId: courseModel.id.toString()));
+                          },
+                          child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                border: Border.all(width: 1,color: Theme.of(context).colorScheme.primary)
+                            ),
+                            child: Center(
+                              child: Text('Add To Wishlist',style: TextStyle(color:Theme.of(context).colorScheme.primary ),),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                verticalSpaceMedium,
                 Row(
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1,color: Theme.of(context).colorScheme.primary)
-                        ),
-                        child: Center(
-                          child: Text('Add To Cart',style: TextStyle(color:Theme.of(context).colorScheme.primary ),),
-                        ),
+                    CircleAvatar(
+                      backgroundImage: NetworkImage(
+                        'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?w=740&t=st=1711268839~exp=1711269439~hmac=9783a0fd6cbb0aebc29bd3f9fd2b0620801b0493d39a69f58e6c4fa14178efe8',
                       ),
+                      radius: 30,
                     ),
-                    horizontalSpaceSmall,
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        height: 50,
-                        decoration: BoxDecoration(
-                            border: Border.all(width: 1,color: Theme.of(context).colorScheme.primary)
+                    SizedBox(width: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Brad Traversy',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.inversePrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17
+                          ),
                         ),
-                        child: Center(
-                          child: Text('Add To Wishlist',style: TextStyle(color:Theme.of(context).colorScheme.primary ),),
+                        Text(
+                          'Software',
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontSize: 15
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ],
                 ),
@@ -150,6 +233,7 @@ class DetailsScreen extends StatelessWidget {
                           style: TextStyle(
                             color: Theme.of(context).colorScheme.inversePrimary,
                             fontWeight: FontWeight.bold,
+                            fontSize: 17
                           ),
                         ),
                         trailing: Icon(
@@ -169,8 +253,11 @@ class DetailsScreen extends StatelessWidget {
                                   style: TextStyle(
                                     color: Theme.of(context).colorScheme.inversePrimary,
                                     fontWeight: FontWeight.normal,
+                                    fontSize: 13
                                   ),
                                 ),
+                                leading: Icon(Icons.play_arrow_outlined,color: Theme.of(context).colorScheme.primary,),
+                                trailing: Text('59:30'),
                                 onTap: () {
                                   // Handle onTap event for video
                                 },
@@ -181,7 +268,7 @@ class DetailsScreen extends StatelessWidget {
                       );
                     },
                   ),
-                )
+                ),
 
               ],
             ),

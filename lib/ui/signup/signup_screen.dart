@@ -18,28 +18,33 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.background,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _upperSection(),
+                _upperSection(context),
                 Column(
                   children: [
                     customTextBox(
                       name: 'Username',
-                      controller: _usernameController
+                      controller: _usernameController,
+                      context: context
                     ),
                     customTextBox(
                       name: 'Email',
-                      controller: _emailController
+                      controller: _emailController,
+                      context: context
                     ),
                     customTextBox(
                       name: 'Password',
-                      controller: _passwordController
+                      controller: _passwordController,
+                      context: context
                     ),
                     customTextBox(
-                        name: 'Confirm-Password'
+                        name: 'Confirm-Password',
+                      context: context
                     ),
                     BlocConsumer<SignupBloc,SignupStates>(
                       listener: (context, state) {
@@ -94,8 +99,8 @@ class SignUpScreen extends StatelessWidget {
   }
 }
 
-Widget _upperSection(){
-  return const Column(
+Widget _upperSection(BuildContext context){
+  return Column(
     children: [
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +125,7 @@ Widget _upperSection(){
         'Create an account so you can explore all the existing jobs',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.inversePrimary,
           fontSize: 16,
           fontFamily: 'Poppins',
           fontWeight: FontWeight.bold,

@@ -1,6 +1,32 @@
 import '../../model/course_model.dart';
-
+import 'package:http/http.dart'as http;
 class CourseRepository {
+  
+  Future<Map> addToCartApi(String userId , String courseId)async{
+    try{
+      var response = await http.get(Uri.parse('http://10.0.2.2:3000/api/user/$userId/cart/$courseId'));
+
+      if(response.statusCode == 201){
+        return {"message":"Course Added To Cart Successfully"};
+      }
+      return {"errorMessage":"Course is already in the cart"};
+    }catch(error){
+      return {"errorMessage":error.toString()};
+    }
+  }
+  Future<Map> addToWishlistApi(String userId , String courseId)async{
+    try{
+      var response = await http.get(Uri.parse('http://10.0.2.2:3000/api/user/$userId/wishlist/$courseId'));
+
+      if(response.statusCode == 201){
+        return {"message":"Course Added To Wishlist Successfully"};
+      }
+      return {"errorMessage":"Course is already in the Wishlist"};
+    }catch(error){
+      return {"errorMessage":error.toString()};
+    }
+  }
+  
   final List<CourseModel> _courses = const [
     CourseModel(
       id: "65f596c5c1f88277ff3756b3",
