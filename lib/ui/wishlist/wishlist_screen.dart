@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/course/course_bloc.dart';
 import '../../bloc/course/course_event.dart';
 import '../../bloc/course/course_state.dart';
-import '../../utils/components/course_cart_container.dart';
+import '../../utils/components/course-containers/course_cart_container.dart';
 import '../../utils/styles.dart';
 
 class WishlistScreen extends StatefulWidget {

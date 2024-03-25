@@ -2,11 +2,24 @@ import 'dart:convert';
 import '../../model/course_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../utils/components/constants.dart';
+
 class CourseRepository {
+  String baseUrl = "";
+  bool dev = true;
+
+  CourseRepository(){
+    if(dev){
+      baseUrl = devBaseUrl;
+    }else{
+      baseUrl = prodBaseUrl;
+    }
+  }
+
   Future<Map> addToCartApi(String userId, String courseId) async {
     try {
       var response = await http.get(
-          Uri.parse('http://10.0.2.2:3000/api/user/$userId/cart/$courseId'));
+          Uri.parse('$baseUrl/user/$userId/cart/$courseId'));
 
       if (response.statusCode == 201) {
         return {"message": "Course Added To cart Successfully"};
@@ -20,7 +33,7 @@ class CourseRepository {
   Future<Map> addToWishlistApi(String userId, String courseId) async {
     try {
       var response = await http.get(Uri.parse(
-          'http://10.0.2.2:3000/api/user/$userId/wishlist/$courseId'));
+          '$baseUrl/user/$userId/wishlist/$courseId'));
 
       if (response.statusCode == 201) {
         return {"message": "Course Added To wishlist Successfully"};
@@ -34,7 +47,7 @@ class CourseRepository {
   Future<List<CourseModel>> fetchCoursesApi() async {
     try {
       var response =
-          await http.get(Uri.parse('http://10.0.2.2:3000/api/course/get'));
+          await http.get(Uri.parse('$baseUrl/course/get'));
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonData = json.decode(response.body);
@@ -54,7 +67,7 @@ class CourseRepository {
   Future<List<CourseModel>> fetchCartApi() async {
     try {
       var response = await http.get(Uri.parse(
-          'http://10.0.2.2:3000/api/user/65edfb88ed5c75b45e38408c/cart'));
+          '$baseUrl/user/65edfb88ed5c75b45e38408c/cart'));
 
       if (response.statusCode == 200) {
         List<dynamic> jsonData = jsonDecode(response.body);
@@ -72,7 +85,7 @@ class CourseRepository {
   Future<List<CourseModel>> fetchWishlistApi() async {
     try {
       var response = await http.get(Uri.parse(
-          'http://10.0.2.2:3000/api/user/65edfb88ed5c75b45e38408c/wishlist'));
+          '$baseUrl/user/65edfb88ed5c75b45e38408c/wishlist'));
 
       if (response.statusCode == 200) {
         List<dynamic> jsonData = jsonDecode(response.body);
@@ -90,7 +103,7 @@ class CourseRepository {
   Future<bool> deleteCartItem(String courseId) async {
     try {
       var response = await http.delete(Uri.parse(
-          'http://10.0.2.2:3000/api/user/65edfb88ed5c75b45e38408c/cart/$courseId'));
+          '$baseUrl/user/65edfb88ed5c75b45e38408c/cart/$courseId'));
       if (response.statusCode == 200) {
         return true;
       }
@@ -102,7 +115,7 @@ class CourseRepository {
   Future<bool> deleteWishlistItem(String courseId) async {
     try {
       var response = await http.delete(Uri.parse(
-          'http://10.0.2.2:3000/api/user/65edfb88ed5c75b45e38408c/wishlist/$courseId'));
+          '$baseUrl/user/65edfb88ed5c75b45e38408c/wishlist/$courseId'));
       if (response.statusCode == 200) {
         return true;
       }

@@ -1,8 +1,8 @@
 import 'package:e_learning/model/course_model.dart';
 import 'package:flutter/material.dart';
 
-import '../../ui/detailpage/details_screen.dart';
-import '../styles.dart';
+import '../../../ui/detailpage/details_screen.dart';
+import '../../styles.dart';
 Widget courseContainer({
   required String thumbnail,
   required String title,

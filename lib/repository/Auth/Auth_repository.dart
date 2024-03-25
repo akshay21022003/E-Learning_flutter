@@ -1,9 +1,21 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:e_learning/utils/components/constants.dart';
 import 'package:http/http.dart' as http;
 
 class AuthRepository {
+
+  String baseUrl = "";
+  bool dev = true;
+
+  AuthRepository(){
+    if(dev){
+      baseUrl = devBaseUrl;
+    }else{
+      baseUrl = prodBaseUrl;
+    }
+  }
   final Map<String, String> _jsonContentHeader = {
     HttpHeaders.contentTypeHeader: 'application/json'
   };

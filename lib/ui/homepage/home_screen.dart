@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/course/course_bloc.dart';
-import '../../utils/components/course_container.dart';
+import '../../utils/components/course-containers/course_container.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
