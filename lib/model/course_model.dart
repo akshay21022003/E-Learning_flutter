@@ -5,9 +5,9 @@ part 'course_model.freezed.dart';
 part 'course_model.g.dart';
 
 enum CourseCategory {
-  photographyAndVideo,
+  photography,
   design,
-  itAndSoftware,
+  software,
   business,
   marketing,
 }
@@ -19,7 +19,7 @@ class CourseModel with _$CourseModel {
     required String title,
     required String description,
     @Default("https://www.srishticampus.com/packageImages/MERN-Stack-considered-the-Best-for-Developing-Web-Apps.png") String thumbnail,
-    @Default(CourseCategory.photographyAndVideo) CourseCategory category,
+    @Default(CourseCategory.photography) CourseCategory category,
     required int price,
     required int oldPrice,
     required List<SectionModel> sections,

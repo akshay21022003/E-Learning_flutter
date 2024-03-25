@@ -101,7 +101,7 @@ class DetailsScreen extends StatelessWidget {
                         behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.transparent,
                         content: AwesomeSnackbarContent(
-                          title: 'Cart',
+                          title: state.message.contains('cart')?'cart':'wishlist',
                           message: state.message,
                           contentType: ContentType.success,
                         ),
@@ -117,7 +117,7 @@ class DetailsScreen extends StatelessWidget {
                         behavior: SnackBarBehavior.floating,
                         backgroundColor: Colors.transparent,
                         content: AwesomeSnackbarContent(
-                          title: 'Cart',
+                          title: state.message.contains('cart')?'cart':'wishlist',
                           message: state.message,
                           contentType: ContentType.failure,
                         ),

@@ -197,7 +197,7 @@ class _$CourseModelImpl implements _CourseModel {
       required this.description,
       this.thumbnail =
           "https://www.srishticampus.com/packageImages/MERN-Stack-considered-the-Best-for-Developing-Web-Apps.png",
-      this.category = CourseCategory.photographyAndVideo,
+      this.category = CourseCategory.photography,
       required this.price,
       required this.oldPrice,
       required final List<SectionModel> sections})

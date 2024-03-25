@@ -15,7 +15,7 @@ _$CourseModelImpl _$$CourseModelImplFromJson(Map<String, dynamic> json) =>
           "https://www.srishticampus.com/packageImages/MERN-Stack-considered-the-Best-for-Developing-Web-Apps.png",
       category:
           $enumDecodeNullable(_$CourseCategoryEnumMap, json['category']) ??
-              CourseCategory.photographyAndVideo,
+              CourseCategory.photography,
       price: json['price'] as int,
       oldPrice: json['oldPrice'] as int,
       sections: (json['sections'] as List<dynamic>)
@@ -36,9 +36,9 @@ Map<String, dynamic> _$$CourseModelImplToJson(_$CourseModelImpl instance) =>
     };
 
 const _$CourseCategoryEnumMap = {
-  CourseCategory.photographyAndVideo: 'photographyAndVideo',
+  CourseCategory.photography: 'photography',
   CourseCategory.design: 'design',
-  CourseCategory.itAndSoftware: 'itAndSoftware',
+  CourseCategory.software: 'software',
   CourseCategory.business: 'business',
   CourseCategory.marketing: 'marketing',
 };
