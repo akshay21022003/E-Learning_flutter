@@ -1,5 +1,10 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:e_learning/bloc/payment/payment_bloc.dart';
+import 'package:e_learning/bloc/payment/payment_event.dart';
+import 'package:e_learning/bloc/payment/payment_state.dart';
 import 'package:flutter/material.dart';
 import 'package:e_learning/model/course_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../utils/styles.dart';
 
 class CheckoutScreen extends StatefulWidget {
@@ -18,15 +23,19 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   @override
   void initState() {
     super.initState();
-    // Calculate the total prices
     calculateTotalPrices();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
 
   void calculateTotalPrices() {
     double originalPrice = 0;
     double discount = 0;
 
-    // Calculate original price and discount for each course
     for (CourseModel course in widget.courseList) {
       originalPrice += course.oldPrice;
       discount += (course.oldPrice - course.price);
@@ -38,7 +47,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       totalPrice = originalPrice - discount;
     });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +58,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             Text(
               'Akshay',
               style: TextStyle(
-                  color: Theme.of(context).colorScheme.inversePrimary),
+                color: Theme.of(context).colorScheme.inversePrimary,),
             ),
             Text(
               'Academy',
@@ -84,7 +92,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     height: 2,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(height: 5),
                   Expanded(
                     child: Container(
                       child: ListView.builder(
@@ -97,29 +105,42 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                                   height: 50,
                                   width: 50,
                                   decoration: BoxDecoration(
-                                      image: DecorationImage(image: NetworkImage(widget.courseList[index].thumbnail),fit: BoxFit.cover)
-                                  ),
+                                      image: DecorationImage(
+                                          image: NetworkImage(widget
+                                              .courseList[index].thumbnail),
+                                          fit: BoxFit.cover)),
                                 ), // Image on the left
-                                title: Text(widget.courseList[index].title,style: TextStyle(
-                                  color: Theme.of(context).colorScheme.inversePrimary,
-                                )),
+                                title: Text(widget.courseList[index].title,
+                                    style: TextStyle(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .inversePrimary,
+                                    )),
                                 trailing: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Text(
-                                        '₹'+widget.courseList[index].price.toString(),
+                                        '₹' +
+                                            widget.courseList[index].price
+                                                .toString(),
                                         style: TextStyle(
-                                          color: Theme.of(context).colorScheme.inversePrimary,
-                                        )
-                                    ),
-                                    Text('₹'+widget.courseList[index].oldPrice.toString(),style: TextStyle(
-                                        color: primaryColor,
-                                        decoration: TextDecoration.lineThrough
-                                    )),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .inversePrimary,
+                                        )),
+                                    Text(
+                                        '₹' +
+                                            widget.courseList[index].oldPrice
+                                                .toString(),
+                                        style: TextStyle(
+                                            color: primaryColor,
+                                            decoration:
+                                                TextDecoration.lineThrough)),
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 5,),
+                              SizedBox(height: 5),
                               Divider(
                                 height: 2,
                                 color: Theme.of(context).colorScheme.primary,
@@ -130,7 +151,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                   )
-
                 ],
               ),
             ),
@@ -155,7 +175,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total Original Price: '),
-                    Text('\₹${totalOriginalPrice.toStringAsFixed(2)}'), // Replace with actual total original price
+                    Text('\₹${totalOriginalPrice.toStringAsFixed(2)}'),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -164,7 +184,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Total Discount: '),
-                    Text('\₹${totalDiscount.toStringAsFixed(2)}'), // Replace with actual total discount
+                    Text('\₹${totalDiscount.toStringAsFixed(2)}'),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -180,7 +200,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       ),
                     ),
                     Text(
-                      '\₹${totalPrice.toStringAsFixed(2)}', // Replace with actual total
+                      '\₹${totalPrice.toStringAsFixed(2)}',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -195,24 +215,62 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             height: 2,
             color: Theme.of(context).colorScheme.secondary,
           ),
-          Container(
-            padding: EdgeInsets.all(16),
-            color: Theme.of(context).colorScheme.background,
-            child: GestureDetector(
-              onTap: () {
-                // Implement your checkout functionality here
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(5),
-                    border: Border.all(width: 5,color: Theme.of(context).colorScheme.inversePrimary)
-                ),
-                child: Center(
-                  child: Text(
-                    'Confirm Checkout',
-                    style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+          BlocListener<PaymentBloc,PaymentState>(
+            listener: (context, state) {
+              if(state.paymentStatus == PaymentStatus.success){
+                final snackBar = SnackBar(
+                  elevation: 0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  content: AwesomeSnackbarContent(
+                    title: 'Successful',
+                    message: 'Payment Successful',
+                    contentType: ContentType.success,
+                  ),
+                );
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              }
+              if(state.paymentStatus == PaymentStatus.failure){
+                final snackBar = SnackBar(
+                  elevation: 0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  content: AwesomeSnackbarContent(
+                    title: 'Failed',
+                    message: 'Payment Failed',
+                    contentType: ContentType.success,
+                  ),
+                );
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              }
+            },
+            child: Container(
+              padding: EdgeInsets.all(16),
+              color: Theme.of(context).colorScheme.background,
+              child: GestureDetector(
+                onTap: () {
+                  context.read<PaymentBloc>().add(PaymentInitiated(amount: totalPrice));
+                },
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      color: primaryColor,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                          width: 5,
+                          color: Theme.of(context).colorScheme.inversePrimary)),
+                  child: Center(
+                    child: Text(
+                      'Confirm Checkout',
+                      style:
+                          TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

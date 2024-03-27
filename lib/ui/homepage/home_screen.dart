@@ -7,7 +7,6 @@ import 'package:e_learning/utils/components/sliver_app_bar.dart';
 import 'package:e_learning/utils/components/tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../bloc/course/course_bloc.dart';
 import '../../utils/components/course-containers/course_container.dart';
 

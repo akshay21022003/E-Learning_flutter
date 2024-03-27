@@ -103,14 +103,31 @@ class _CartScreenState extends State<CartScreen> {
               ),
               child: FloatingActionButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CheckoutScreen(
-                        courseList: state.courseList,
+                  if(state.courseList.length == 0){
+                    final snackBar = SnackBar(
+                      elevation: 0,
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.transparent,
+                      content: AwesomeSnackbarContent(
+                        title: 'Cart',
+                        message: 'Cart is empty',
+                        contentType: ContentType.warning,
                       ),
-                    ),
-                  );
+                    );
+
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(snackBar);
+                  }else{
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutScreen(
+                          courseList: state.courseList,
+                        ),
+                      ),
+                    );
+                  }
                 },
                 backgroundColor: primaryColor,
                 child: Icon(Icons.navigate_next,color: Theme.of(context).colorScheme.inversePrimary,size: 25),
